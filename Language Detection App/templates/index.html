@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Detection App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div>
+        <h2>Language Detection</h2>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('Predict')}}" method="post">
+            <input type="text" name="Input Text Here" placeholder="Input your text" required="required">
+            <div class="spacer"></div>
+            <button type="submit">Predict</button>
+            <div class="spacer"></div>
+            {% if prediction_text %}
+                <div class="prediction">
+                    <h1>{{ prediction_text }}</h1>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
